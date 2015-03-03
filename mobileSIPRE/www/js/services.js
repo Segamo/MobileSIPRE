@@ -56,17 +56,7 @@ angular.module('starter.services', [])
         loginUser: function(name, pw) {
             var deferred = $q.defer();
             var promise = deferred.promise;
-            
-            var name, email;
-        
-            email        = name;
-            password     = pw;
-        
-            var urlService 	= url + "ServicioUsuario.php";
-            var params      = "nombreServicio=login" + "&email=" + email + "&password=" + password;
-        
-            callService(urlService, params, 'procesoLogin');
- 
+             
             if (name == 'user' && pw == 'secret') {
                 deferred.resolve('Welcome ' + name + '!');
             } else {
