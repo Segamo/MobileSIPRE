@@ -2,6 +2,14 @@ angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope) {})
 
+.controller('LoginCtrl', function($scope) {
+  $scope.data = {};
+  
+  $scope.login = function() {
+    console.log("LOGIN user: " + $scope.data.email + " - PW: " + $scope.data.password);
+  }
+})
+
 .controller('ChatsCtrl', function($scope, Chats) {
   $scope.chats = Chats.all();
   $scope.remove = function(chat) {

@@ -42,12 +42,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
   .state('login', {
     url: '/login',
-    templateUrl: 'templates/login.html'
+    templateUrl: 'templates/login.html',
+    controler: 'LoginCtrl'
   })
   
   .state('signup', {
     url: '/signup',
-    templateUrl: 'templates/signup.html'
+    templateUrl: 'templates/signup.html',
+    controler: 'LignupCtrl'
   })
   
   .state('tab.dash', {
@@ -60,8 +62,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
   })
   
-  
-
   .state('tab.chats', {
       url: '/chats',
       views: {
@@ -111,6 +111,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('login');
 
 });
