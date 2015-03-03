@@ -8,6 +8,17 @@ angular.module('starter.controllers', [])
     $scope.data = {};
  
     $scope.login = function() {
+        
+        var name, email;
+        
+        email        = $scope.data.name;
+        password     = $scope.data.password;
+        
+        var urlService 	= url + "ServicioUsuario.php";
+        var params      = "nombreServicio=login" + "&email=" + email + "&password=" + password;
+        
+        callService(urlService, params, 'procesoLogin');
+        
         LoginService.loginUser($scope.data.email, $scope.data.password).success(function(data) {
             $state.go('tab.dash');
         }).error(function(data) {
@@ -23,6 +34,8 @@ angular.module('starter.controllers', [])
     $scope.data = {};
     
     $scope.signup = function() {
+    
+    var name, lastname, email, code, id, career, password, passwordc;    
         
     name        = $scope.data.name;
     lastname    = $scope.data.lastName;

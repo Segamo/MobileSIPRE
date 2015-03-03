@@ -50,6 +50,7 @@ class ServicioUsuario {
     }
 
     public function login($email, $password) {
+        echo "Llegue aqui"
         $_SESSION['user'] = -1;
         $result = $this->controlUsuario->consultar($email, $password);
         if($result) {

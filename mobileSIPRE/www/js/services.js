@@ -1,3 +1,5 @@
+var url = "http://localhost/mobilesipre/www/servicios/";
+
 angular.module('starter.services', [])
 
 .factory('Chats', function() {
@@ -54,6 +56,16 @@ angular.module('starter.services', [])
         loginUser: function(name, pw) {
             var deferred = $q.defer();
             var promise = deferred.promise;
+            
+            var name, email;
+        
+            email        = name;
+            password     = pw;
+        
+            var urlService 	= url + "ServicioUsuario.php";
+            var params      = "nombreServicio=login" + "&email=" + email + "&password=" + password;
+        
+            callService(urlService, params, 'procesoLogin');
  
             if (name == 'user' && pw == 'secret') {
                 deferred.resolve('Welcome ' + name + '!');
@@ -119,4 +131,18 @@ angular.module('starter.services', [])
   }
 });
 
+function callService(urlService, params, cb){
+    $.ajax({
+        dataType:       'jsonp',
+        url:            urlService,
+        data:           params,
+        type:           "GET",
+        crossDomain:    true,
+        jsonpCallback:  cb,
+        error: function(xhr, status, error) {
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        }});
+}
 
