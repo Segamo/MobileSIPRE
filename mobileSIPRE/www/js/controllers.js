@@ -2,11 +2,18 @@ angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope) {})
 
-.controller('LoginCtrl', function($scope) {
+.controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state) {
     $scope.data = {};
  
     $scope.login = function() {
-        console.log("LOGIN user: " + $scope.data.email + " - PW: " + $scope.data.password);
+        LoginService.loginUser($scope.data.email, $scope.data.password).success(function(data) {
+            $state.go('tab.dash');
+        }).error(function(data) {
+            var alertPopup = $ionicPopup.alert({
+                title: 'Login failed!',
+                template: 'Please check your credentials!'
+            });
+        });
     }
 })
 
@@ -14,7 +21,7 @@ angular.module('starter.controllers', [])
     $scope.data = {};
  
     $scope.signup = function() {
-        console.log("Nombre: " +$scope.data.name + "Email: " + $scope.data.email);
+        console.log("Nombre: " +$scope.data.name + " Email: " + $scope.data.email);
       
     }
 })
