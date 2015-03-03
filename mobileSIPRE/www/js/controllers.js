@@ -1,3 +1,5 @@
+var url = "http://localhost/mobilesipre/servicios/";
+
 angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope) {})
@@ -21,9 +23,9 @@ angular.module('starter.controllers', [])
     $scope.data = {};
     
     $scope.signup = function() {
-    
+        
     name        = $scope.data.name;
-    lastname    = $scope.data.lastname;
+    lastname    = $scope.data.lastName;
     email       = $scope.data.email;
     code        = $scope.data.code;
     id          = $scope.data.id;
@@ -35,7 +37,6 @@ angular.module('starter.controllers', [])
     
     var params		= "nombreServicio=registro" + "&name=" + name + "&lastname=" + lastname + "&email=" + email + "&code=" + code + "&id=" + id + "&career=" + career  + "&password=" + password + "&passwordc=" + passwordc;
     callService(urlService, params, 'exito');
-      
     }
 })
 
@@ -63,3 +64,18 @@ angular.module('starter.controllers', [])
     enableFriends: true
   };
 });
+
+function callService(urlService, params, cb){
+    $.ajax({
+        dataType:       'jsonp',
+        url:            urlService,
+        data:           params,
+        type:           "GET",
+        crossDomain:    true,
+        jsonpCallback:  cb,
+        error: function(xhr, status, error) {
+            console.log(xhr);
+            console.log(status);
+            console.log(error);
+        }});
+}
