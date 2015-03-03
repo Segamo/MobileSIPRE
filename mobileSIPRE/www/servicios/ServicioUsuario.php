@@ -24,7 +24,7 @@ switch ($nombreServicio) {
 
     case 'login' :
         @$email     = $_GET['email'];
-        @$password      = $_GET['password'];
+        @$password  = $_GET['password'];
         $servicio   = new ServicioUsuario();
         $servicio->login($email, $password);
         break;
