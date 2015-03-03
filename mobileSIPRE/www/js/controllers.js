@@ -1,19 +1,46 @@
 angular.module('starter.controllers', [])
 
-.controller('LoginCtrl', function($scope, auth, $state, store) {
-  auth.signin({
-    closable: false,
-    // This asks for the refresh token
-    // So that the user never has to log in again
-    authParams: {
-      scope: 'openid offline_access'
+angular.module('myApp', ['auth0', 'angular-storage', 'angular-jwt'])
+.run(function($rootScope, auth, store, jwtHelper, $location) {
+  // This events gets triggered on refresh or URL change
+  $rootScope.$on('$locationChangeStart', function() {
+    if (!auth.isAuthenticated) {
+      var token = store.get('token');
+      if (token) {
+        if (!jwtHelper.isTokenExpired(token)) {
+          auth.authenticate(store.get('profile'), token);
+        } else {
+          auth.refreshIdToken(refreshToken).then(function(idToken) {
+            store.set('token', idToken);
+            auth.authenticate(store.get('profile'), idToken);
+            return idToken;
+          });
+        }
+      }
     }
-  }, function(profile, idToken, accessToken, state, refreshToken) {
+  });
+});
+
+app.controller('LoginCtrl', function($scope, auth, $state, store) {
+  auth.signin({
+    authParams: {
+      // This asks for the refresh token
+      // So that the user never has to log in again
+      scope: 'openid offline_access',
+      // This is the device name
+      device: 'Mobile device'
+    },
+    // Make the widget non closeable
+    standalone: true
+  }, function(profile, token, accessToken, state, refreshToken) {
+          // Login was successful
+    // We need to save the information from the login
     store.set('profile', profile);
-    store.set('token', idToken);
+    store.set('token', token);
     store.set('refreshToken', refreshToken);
     $state.go('tab.dash');
   }, function(error) {
+    // Oops something went wrong during login:
     console.log("There was an error logging in", error);
   });
 })
