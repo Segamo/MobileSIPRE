@@ -19,9 +19,22 @@ angular.module('starter.controllers', [])
 
 .controller('SignupCtrl', function($scope) {
     $scope.data = {};
- 
+    
     $scope.signup = function() {
-        console.log("Nombre: " +$scope.data.name + " Email: " + $scope.data.email);
+    
+    name        = $scope.data.name;
+    lastname    = $scope.data.lastname;
+    email       = $scope.data.email;
+    code        = $scope.data.code;
+    id          = $scope.data.id;
+    career      = $scope.data.career;
+    password    = $scope.data.password;
+    passwordc   = $scope.data.passwordc;
+    
+    var urlService 	= url + "ServicioUsuario.php";
+    
+    var params		= "nombreServicio=registro" + "&name=" + name + "&lastname=" + lastname + "&email=" + email + "&code=" + code + "&id=" + id + "&career=" + career  + "&password=" + password + "&passwordc=" + passwordc;
+    callService(urlService, params, 'exito');
       
     }
 })
