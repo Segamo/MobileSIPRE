@@ -43,13 +43,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   .state('login', {
     url: '/login',
     templateUrl: 'templates/login.html',
-    controler: 'LoginCtrl'
+    controller: 'LoginCtrl'
   })
   
   .state('signup', {
     url: '/signup',
     templateUrl: 'templates/signup.html',
-    controler: 'LignupCtrl'
+    controller: 'SignupCtrl'
   })
   
   .state('tab.dash', {

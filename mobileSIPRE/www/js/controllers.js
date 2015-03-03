@@ -3,11 +3,20 @@ angular.module('starter.controllers', [])
 .controller('DashCtrl', function($scope) {})
 
 .controller('LoginCtrl', function($scope) {
-  $scope.data = {};
-  
-  $scope.login = function() {
-    console.log("LOGIN user: " + $scope.data.email + " - PW: " + $scope.data.password);
-  }
+    $scope.data = {};
+ 
+    $scope.login = function() {
+        console.log("LOGIN user: " + $scope.data.email + " - PW: " + $scope.data.password);
+    }
+})
+
+.controller('SignupCtrl', function($scope) {
+    $scope.data = {};
+ 
+    $scope.signup = function() {
+        console.log("Nombre: " +$scope.data.name + "Email: " + $scope.data.email);
+      
+    }
 })
 
 .controller('ChatsCtrl', function($scope, Chats) {
