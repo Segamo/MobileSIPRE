@@ -97,8 +97,8 @@ angular.module('starter', ['ionic',
 
   // Configure Auth0
   authProvider.init({
-    domain: AUTH0_DOMAIN,
-    clientID: AUTH0_CLIENT_ID,
+    domain: 'julrod092.auth0.com',
+    clientID: '7ba2i4VzSmPOch8oxKTHDauAlUhtdPKu',
     loginState: 'login'
   });
 
