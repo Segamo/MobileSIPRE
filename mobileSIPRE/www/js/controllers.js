@@ -34,8 +34,8 @@ angular.module('starter.controllers', [])
     passwordc   = $scope.data.passwordc;
     
     var urlService 	= url + "ServicioUsuario.php";
-    
-    var params		= "nombreServicio=registro" + "&name=" + name + "&lastname=" + lastname + "&email=" + email + "&code=" + code + "&id=" + id + "&career=" + career  + "&password=" + password + "&passwordc=" + passwordc;
+    var params	= "nombreServicio=registro" + "&name=" + name + "&lastname=" + lastname + "&email=" + email + "&code=" + code + "&id=" + id + "&career=" + career  + "&password=" + password + "&passwordc=" + passwordc;
+        
     callService(urlService, params, 'exito');
     }
 })
