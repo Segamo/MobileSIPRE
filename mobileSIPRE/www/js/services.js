@@ -1,4 +1,5 @@
-var url = "http://localhost/mobilesipre/www/servicios/";
+var url = "http://localhost:8888/mobileSIPRE/servicios/";
+
 
 angular.module('starter.services', [])
 

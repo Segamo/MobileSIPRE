@@ -1,4 +1,4 @@
-var url = "http://localhost/mobilesipre/www/servicios/";
+var url = "http://localhost:8888/mobileSIPRE/servicios/";
 
 angular.module('starter.controllers', [])
 
@@ -11,14 +11,34 @@ angular.module('starter.controllers', [])
         
         var name, email;
         
-        email        = $scope.data.name;
+        email        = $scope.data.email;
         password     = $scope.data.password;
+      
+        console.log(email +  " " + password);
+
         
         var urlService 	= url + "ServicioUsuario.php";
         var params      = "nombreServicio=login" + "&email=" + email + "&password=" + password;
         
-        callService(urlService, params, 'procesoLogin');
+      console.log(urlService);
+      console.log(params);
+      //callService(urlService, params, 'procesoLogin');
+      
+      if ($scope.data.email && $scope.data.password){
+        $.ajax({
+        dataType:       'jsonp',
+        url:            urlService,
+        data:           params,
+        type:           "GET",
+        crossDomain:    true,
+        jsonpCallback:  "procesoLogin",
+        success: function (data) {
+            $state.go('tab.dash');
+        }});
+      }
         
+        
+      /*
         LoginService.loginUser($scope.data.email, $scope.data.password).success(function(data) {
             $state.go('tab.dash');
         }).error(function(data) {
@@ -26,7 +46,7 @@ angular.module('starter.controllers', [])
                 title: 'Login failed!',
                 template: 'Please check your credentials!'
             });
-        });
+        });*/
     }
 })
 
