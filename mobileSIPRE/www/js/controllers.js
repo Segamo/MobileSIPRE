@@ -1,4 +1,4 @@
-var url = "http://localhost:8888/mobileSIPRE/servicios/";
+var url = "../../../services/servicios/";
 
 angular.module('starter.controllers', [])
 
@@ -13,35 +13,29 @@ angular.module('starter.controllers', [])
         
         email        = $scope.data.email;
         password     = $scope.data.password;
-      
-        console.log(email +  " " + password);
-
         
         var urlService 	= url + "ServicioUsuario.php";
-        var params      = "nombreServicio=login" + "&email=" + email + "&password=" + password;
-        
-      console.log(urlService);
-      console.log(params);
-      //callService(urlService, params, 'procesoLogin');
+        var params      = "nombreServicio=login" 
+        + "&email=" + email 
+        + "&password=" + password;
       
-      if ($scope.data.email && $scope.data.password){
-        $.ajax({
-        dataType:       'jsonp',
-        url:            urlService,
-        data:           params,
-        type:           "GET",
-        crossDomain:    true,
-        jsonpCallback:  "procesoLogin",
-        success: function (data) {
-            //$state.go('tab.dash');
-	    var x = data[0];
-	    if (x.email == email && x.password == password) {
-		$state.go('tab.dash');
-	    }
-        }});
+        if ($scope.data.email && $scope.data.password){
+          $.ajax({
+          dataType:       'jsonp',
+          url:            urlService,
+          data:           params,
+          type:           "GET",
+          crossDomain:    true,
+          jsonpCallback:  "procesoLogin",
+          success: function (data) {
+              //$state.go('tab.dash');
+             var x = data[0];
+             if (x.email == email && x.password == password) {
+              $state.go('tab.dash');
+             }
+          }});
       }
-        
-        
+          
       /*
         LoginService.loginUser($scope.data.email, $scope.data.password).success(function(data) {
             $state.go('tab.dash');
@@ -54,26 +48,66 @@ angular.module('starter.controllers', [])
     }
 })
 
-.controller('SignupCtrl', function($scope) {
+.controller('SignupCtrl', function($scope, $ionicPopup, $state) {
     $scope.data = {};
     
     $scope.signup = function() {
     
-    var name, lastname, email, code, id, career, password, passwordc;    
-        
-    name        = $scope.data.name;
-    lastname    = $scope.data.lastName;
-    email       = $scope.data.email;
-    code        = $scope.data.code;
-    id          = $scope.data.id;
-    career      = $scope.data.career;
-    password    = $scope.data.password;
-    passwordc   = $scope.data.passwordc;
-    
-    var urlService 	= url + "ServicioUsuario.php";
-    var params	= "nombreServicio=registro" + "&name=" + name + "&lastname=" + lastname + "&email=" + email + "&code=" + code + "&id=" + id + "&career=" + career  + "&password=" + password + "&passwordc=" + passwordc;
-        
-    callService(urlService, params, 'exito');
+      var name, lastname, email, code, id, career, password, passwordc;    
+
+      name        = $scope.data.name;
+      lastname    = $scope.data.lastName;
+      email       = $scope.data.email;
+      code        = $scope.data.code;
+      id          = $scope.data.id;
+      career      = $scope.data.career;
+      password    = $scope.data.password;
+      passwordc   = $scope.data.passwordc;
+      
+      var pattern=/^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+/;
+      
+      if (pattern.test(email)) {
+        var urlService 	= url + "ServicioUsuario.php";
+        var params	= "nombreServicio=registro" 
+        + "&name=" + name 
+        + "&lastname=" + lastname 
+        + "&email=" + email 
+        + "&code=" + code 
+        + "&id=" + id 
+        + "&career=" + career  
+        + "&password=" + password 
+        + "&passwordc=" + passwordc;
+        pattern = /^([a-zA-Z0-9_.-])/;
+        if (pattern.test(name) && 
+            pattern.test(lastname) && 
+            pattern.test(code) && 
+            pattern.test(career) &&
+            pattern.test(password)) {
+          if (password == passwordc) {
+            callService(urlService, params, 'exito');
+            $ionicPopup.alert({
+                title: 'Successful!',
+                template: 'Sign up successful!'
+            });
+            $state.go('login');
+          }else{
+            $ionicPopup.alert({
+                title: 'Failed!',
+                template: 'Sign up failed, please check your password!'
+            });
+          }
+        } else {
+          $ionicPopup.alert({
+                title: 'Failed!',
+                template: 'Sign up failed, please check your basic information!'
+          });
+        }
+      } else {
+        $ionicPopup.alert({
+                title: 'Failed!',
+                template: 'Sign up failed, please check your email!'
+        });
+      }
     }
 })
 
@@ -110,9 +144,8 @@ function callService(urlService, params, cb){
         type:           "GET",
         crossDomain:    true,
         jsonpCallback:  cb,
-        error: function(xhr, status, error) {
-            console.log(xhr);
-            console.log(status);
-            console.log(error);
-        }});
+        success: function (data) {
+          
+        }
+    });
 }
