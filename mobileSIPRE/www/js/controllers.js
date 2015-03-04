@@ -33,7 +33,11 @@ angular.module('starter.controllers', [])
         crossDomain:    true,
         jsonpCallback:  "procesoLogin",
         success: function (data) {
-            $state.go('tab.dash');
+            //$state.go('tab.dash');
+	    var x = data[0];
+	    if (x.email == email && x.password == password) {
+		$state.go('tab.dash');
+	    }
         }});
       }
         
