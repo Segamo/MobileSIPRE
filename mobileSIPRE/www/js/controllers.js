@@ -1,4 +1,4 @@
-var url = "../../../services/servicios/";
+var url = "http://localhost/mobilesipre/www/servicios/";
 
 angular.module('starter.controllers', [])
 
@@ -100,7 +100,7 @@ angular.module('starter.controllers', [])
             }else{
                 $ionicPopup.alert({
                     title: 'Failed!',
-                    template: 'Sign up failed, please check your Code or Id!'
+                    template: 'Sign up failed, please check your Code or ID!'
                 });  
             }
         } else {
