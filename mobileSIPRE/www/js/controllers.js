@@ -1,4 +1,4 @@
-var url = "http://ec2-52-0-162-106.compute-1.amazonaws.com/services/servicios/";
+var url = "http://ec2-52-0-162-106.compute-1.amazonaws.com/MobileSIPRE/services/servicios/";
 
 angular.module('starter.controllers', [])
 
