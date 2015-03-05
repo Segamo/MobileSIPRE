@@ -1,4 +1,4 @@
-var url = "http://localhost/mobilesipre/www/servicios/";
+var url = "http://ec2-52-0-162-106.compute-1.amazonaws.com/services/servicios/";
 
 angular.module('starter.controllers', [])
 
