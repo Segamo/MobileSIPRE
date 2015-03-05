@@ -80,22 +80,29 @@ angular.module('starter.controllers', [])
         pattern = /^([a-zA-Z0-9_.-])/;
         if (pattern.test(name) && 
             pattern.test(lastname) && 
-            pattern.test(code) && 
             pattern.test(career) &&
             pattern.test(password)) {
-          if (password == passwordc) {
-            callService(urlService, params, 'exito');
-            $ionicPopup.alert({
-                title: 'Successful!',
-                template: 'Sign up successful!'
-            });
-            $state.go('login');
-          }else{
-            $ionicPopup.alert({
-                title: 'Failed!',
-                template: 'Sign up failed, please check your password!'
-            });
-          }
+            pattern = /^([0-9_.-])/;
+            if( pattern.test(code) && pattern.test(id)){
+              if (password == passwordc) {
+                callService(urlService, params, 'exito');
+                $ionicPopup.alert({
+                    title: 'Successful!',
+                    template: 'Sign up successful!'
+                });
+                $state.go('login');
+              }else{
+                $ionicPopup.alert({
+                    title: 'Failed!',
+                    template: 'Sign up failed, please check your password!'
+                }); 
+              }
+            }else{
+                $ionicPopup.alert({
+                    title: 'Failed!',
+                    template: 'Sign up failed, please check your Code or Id!'
+                });  
+            }
         } else {
           $ionicPopup.alert({
                 title: 'Failed!',
